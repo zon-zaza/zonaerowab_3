@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZonAero | Modular Drone Ecosystem</title>
+  <link rel="stylesheet" href="Multi_purpose_drone_infor.css" />
+</head>
+
+<body>
+  <!-- NAV -->
+  <nav class="topnav reveal" data-delay="1">
+    <a class="brand" href="index.html">
+      <div class="brand-badge" aria-hidden="true"></div>
+      <div>
+        <div class="brand-title">ZonAero</div>
+        <div class="brand-sub">Socket Module Ecosystem</div>
+      </div>
+    </a>
+
+    <div class="navlinks">
+      <a href="#concept">แนวคิด</a>
+      <a href="#summary">สรุป</a>
+      <a href="#key-features">จุดเด่น</a>
+      <a href="#problem">ปัญหาเดิม</a>
+      <a href="#architecture">สถาปัตยกรรม</a>
+      <a href="#socket">Socket</a>
+      <a href="#selfdesc">Self-Describing</a>
+      <a href="#reliability">ความเสถียร</a>
+      <a href="#power">ไฟ/ความปลอดภัย</a>
+      <a href="#videos">วิดีโอ</a>
+      <a href="#examples">โมดูล</a>
+      <a href="#future">อนาคต</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">ติดต่อ</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <!-- HeroBG: แบบไม่ fixed (ตามที่คุณต้องการก่อนหน้า) -->
+    <div class="hero-bg reveal zoom" data-delay="1" aria-hidden="true"></div>
+
+    <div class="container hero-inner">
+      <div>
+        <div class="hero-kicker reveal" data-delay="2">
+          <span class="dot" aria-hidden="true"></span>
+          สถาปัตยกรรมระบบ • Flight Core บน MCU • โมดูลแบบ Socket
+        </div>
+
+        <h1 class="hero-title reveal" data-delay="3">
+          <span class="hero-accent">โดรนอเนกประสงค์</span><br/>
+          <span class="Aerogold">Modular Ecosystem</span>
+          <span class="gold">Socket Module</span>
+        </h1>
+
+        <p class="hero-sub reveal" data-delay="4">
+          โดรนแพลตฟอร์มที่แยก “แกนการบิน (Flight Core)” ออกจาก “ระบบภารกิจ (Module)”
+          เพื่อให้เปลี่ยนภารกิจได้โดยไม่ต้องแก้เฟิร์มแวร์แกนหลักทุกครั้ง และรองรับการต่อยอดแบบ ecosystem
+        </p>
+
+        <div class="hero-actions reveal" data-delay="5">
+          <a class="btn primary" href="#architecture">🧠 ดูโครงสร้างระบบ</a>
+          <a class="btn" href="#videos">▶ ดูวิดีโอ</a>
+          <a class="btn" href="#contact">✉ ขอข้อมูลเพิ่ม</a>
+        </div>
+      </div>
+
+      <aside class="hero-card reveal right" data-delay="3">
+        <h3 style="margin:0 0 6px;">ภาพรวมโครงการ</h3>
+        <p style="margin:0;color:rgba(230,238,252,.72);line-height:1.65;">
+          เป้าหมายคือทำให้โดรน 1 ลำเป็น “แพลตฟอร์ม” ที่สลับภารกิจได้ด้วยโมดูล
+          โดย Flight Core คงเสถียรและปลอดภัย ส่วนโมดูลทำงานเป็น subsystem แยกส่วน
+        </p>
+
+        <div class="statgrid">
+          <div class="stat"><div class="k">แกนหลัก</div><div class="v">MCU FC</div></div>
+          <div class="stat"><div class="k">แนวคิด</div><div class="v">Ecosystem</div></div>
+          <div class="stat"><div class="k">โมดูล</div><div class="v">Socket</div></div>
+          <div class="stat"><div class="k">หลักการ</div><div class="v">Separation</div></div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <!-- =========================
+         (0) NEW: แนวคิดโครงการ (5W1H) - ภาษาไทย + ป้องกันความลับ
+    ========================== -->
+    <section class="section" id="concept">
+      <div class="container">
+        <h2 class="section-title reveal" data-delay="1">
+          <span class="Aerogold">แนวคิดของโครงการ</span>
+        </h2>
+
+        <div class="card reveal" data-delay="2">
+          <p class="paragraph">
+            ระบบนี้ถูกออกแบบสำหรับผู้ใช้ 3 กลุ่ม ได้แก่ ผู้ใช้งานโดรนที่ต้องสลับภารกิจในภาคสนาม,
+            นักพัฒนาที่ดูแล Flight Core ให้มีเสถียรภาพและข้อกำหนดด้านความปลอดภัยคงที่,
+            และผู้สร้างโมดูลที่พัฒนาระบบภารกิจเป็น subsystem แยกจากแกนหลัก โครงการนี้ถูกสร้างขึ้นมาเพื่อแก้ปัญหา
+            โดรนแบบเดิมที่เมื่อเปลี่ยน payload/อุปกรณ์ภายนอก มักต้องแก้เฟิร์มแวร์หลักจนเกิดหลายเวอร์ชัน
+            ทดสอบยากและเสี่ยงต่อความเสถียรของการบิน จึงเหมาะกับสถานการณ์ที่ภารกิจเปลี่ยนบ่อย เช่น เกษตร/กล้อง/สำรวจ/งานเฉพาะทาง
+            โดยที่ตัวลำและ Flight Core ควร “คงเดิม” ส่วนความสามารถภารกิจย้ายไปอยู่ที่โมดูล เหตุผลที่ออกแบบเป็น ecosystem
+            คือเพื่อให้มาตรฐานการเชื่อมต่อ การค้นพบ และความหมายของคำสั่งเป็นแบบเดียวกัน ทำให้โมดูลจากหลายผู้พัฒนาใช้งานร่วมกันได้
+            โดยไม่ย้อนกลับไปแก้แกนหลักทุกครั้ง แนวคิด socket module จึงเป็นขอบเขตระบบที่ทำให้โมดูลประกาศตัวตน/ความสามารถระดับแนวคิด
+            แล้วให้ Flight Core ทำหน้าที่ route และกำกับความปลอดภัย ขณะที่การควบคุมการบินยังคง deterministic และเสถียร
+          </p>
+        </div>
+
+        <!-- NEW: ป้องกันความลับ -->
+        <div class="notice reveal" data-delay="3">
+          <b>หมายเหตุ (Public-safe):</b>
+          หน้านี้อธิบายระดับสถาปัตยกรรมเท่านั้น จึงไม่เผยรายละเอียด low-level เช่น โครงสร้างเฟรมจริง,
+          mapping คำสั่งจริง, ค่าควบคุมเฉพาะ, หรือรหัสระบุตัวตนที่ใช้จริง เพื่อป้องกันการ reverse ระบบ
+        </div>
+      </div>
+    </section>
+
+    <!-- (1) NEW: สรุปโครงการ -->
+    <section class="section" id="summary">
+      <div class="container">
+        <h2 class="section-title reveal" data-delay="1">
+          <span class="gold">สรุปโครงการ</span>
+        </h2>
+        <div class="card reveal" data-delay="2">
+          <p class="paragraph">
+            โครงการนี้เป็นโดรนที่พัฒนาระบบ <span class="gold">Socket Module</span> เพิ่มเติมโดยโมดูลสามารถเสียบใช้งานได้ทันที
+            โดยไม่ต้องแก้ Flight Core ทุกครั้งที่เปลี่ยนภารกิจ ทำให้แกนการบินคงเสถียรเป็นมาตรฐานเดียว
+            และช่วยให้การพัฒนาโมดูลภารกิจสามารถทำได้อย่างอิสระ
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW: Key Features -->
+    <section class="section" id="key-features">
+      <div class="container">
+        <h2 class="section-title reveal" data-delay="1">
+          <span class="Aeroblue">จุดเด่นของระบบ</span>
+        </h2>
+        <p class="section-desc reveal" data-delay="2">
+          คุณสมบัติระดับสถาปัตยกรรม
+        </p>
+
+        <div class="grid3">
+          <div class="card reveal left" data-delay="1">
+            <h3>Flight Core คงที่</h3>
+            <p>ลดการแก้เฟิร์มแวร์หลักตาม payload และลดความเสี่ยง regression</p>
+            <div class="pill">⚙️ Stable Core</div>
+          </div>
+
+          <div class="card reveal" data-delay="2">
+            <h3>โมดูลเป็น Subsystem</h3>
+            <p>แยกส่วนภารกิจออกจากการบิน ทำให้พัฒนา/ทดสอบ/สลับภารกิจได้เร็ว</p>
+            <div class="pill">🧩 Subsystem</div>
+          </div>
+
+          <div class="card reveal right" data-delay="3">
+            <h3>Self-Describing</h3>
+            <p>ประกาศ “ตัวตน + ความสามารถของ Module” เพื่อให้ระบบจัดการได้อัตโนมัติ</p>
+            <div class="pill">🧾 Discovery</div>
+          </div>
+
+          <div class="card reveal left" data-delay="1">
+            <h3>การสื่อสารเน้นความเสถียร</h3>
+            <p>กลไกยืนยัน/ลองใหม่แบบมีขอบเขต โดยต่อย่อดมาจาก Protocol (CRC16-CCITT)</p>
+            <div class="pill">📡 Reliable Link</div>
+          </div>
+
+          <div class="card reveal" data-delay="2">
+            <h3>แยกระบบไฟ</h3>
+            <p>แยกไฟ Logic และ Payload เพื่อลดผลกระทบต่อ Flight core</p>
+            <div class="pill">🔌 Power Domains</div>
+          </div>
+
+          <div class="card reveal right" data-delay="3">
+            <h3>รองรับ Ecosystem</h3>
+            <p>รองรับโมดูลจากหลายผู้พัฒนา ภายใต้ข้อกำหนดเดียวกัน</p>
+            <div class="pill">🧑‍💻 Extensible</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- (2) NEW: ปัญหาเดิม -->
+    <section class="section" id="problem">
+      <div class="container">
+        <h2 class="section-title reveal" data-delay="1">
+          <span class="Radddddddd">ปัญหาของโดรนแบบเดิม</span>
+        </h2>
+        <div class="grid2">
+          <div class="card reveal left" data-delay="1">
+            <h3>การแก้เฟิร์มแวร์เมื่อเปลี่ยนอุปกรณ์</h3>
+            <p>
+              เมื่อเปลี่ยน payload หรืออุปกรณ์ภายนอก มักต้องแก้ตรรกะ/การจัดการความปลอดภัยในเฟิร์มแวร์หลัก
+              ส่งผลให้เกิดหลายเวอร์ชัน ทดสอบยาก และเพิ่มความเสี่ยงต่อความเสถียรของการบิน
+            </p>
+          </div>
+          <div class="card reveal right" data-delay="2">
+            <h3>ข้อจำกัดของโดรนเชิงภารกิจแบบตายตัว</h3>
+            <p>
+              โดรนจำนวนมากถูกออกแบบให้เหมาะกับภารกิจเดียว การเปลี่ยนภารกิจมักต้องเปลี่ยนทั้งลำหรือสร้างระบบใหม่
+              ทำให้ไม่สามารถใช้เป็น “แพลตฟอร์มร่วม” ได้
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- (3) NEW: สถาปัตยกรรม -->
+    <section class="section" id="architecture">
+      <div class="container">
+        <h2 class="section-title reveal" data-delay="1"><span class="Aeroblue">สถาปัตยกรรมระบบ</span></h2>
+        <p class="section-desc reveal" data-delay="2">
+          โครงสร้าง: <b>รีโมท → โดรน → โมดูล</b> โดยรีโมทส่งความตั้งใจผู้ใช้และคำสั่งภารกิจ,
+          Flight Core ตรวจสอบ/กำกับความปลอดภัย และ route ไปยังโมดูล,
+          โมดูลทำงานภารกิจและส่งสถานะกลับเพื่อการแสดงผล/บันทึก
+        </p>
+
+        <div class="card reveal" data-delay="3">
+          <div class="mono">
+            รีโมท → (คำสั่ง/โหมด) → Flight Core (Safety + Routing) → โมดูล (Subsystem) → Payload
+            <br/>
+            Telemetry/Status ← โมดูล ← Flight Core (Aggregation) ← รีโมท/บันทึกข้อมูล
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- (4) NEW: Socket Module -->
+    <section class="section" id="socket">
+      <div class="container">
+        <h2 class="section-title reveal" data-delay="1"> 
+          <span class="Aerogold">แนวคิด</span> 
+          <span class="gold">Socket Module</span>
+        </h2>
+        <div class="grid2">
+          <div class="card reveal left" data-delay="1">
+            <h3>Plug-and-play</h3>
+            <p>โมดูลถูกออกแบบให้เชื่อมต่อเข้าระบบได้ตามมาตรฐานเดียวกัน และใช้งานได้โดยไม่ต้องแก้ Flight Core</p>
+            <div class="pill">🧲 Plug-and-play</div>
+          </div>
+          <div class="card reveal right" data-delay="2">
+            <h3>โมดูลเป็น subsystem แยกจาก flight core</h3>
+            <p>Flight Core คุมการบินและ safety gating ส่วนโมดูลรับผิดชอบภารกิจภายใต้ขอบเขตความสามารถที่ประกาศไว้</p>
+            <div class="pill">⚙️ Boundary</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- (5) NEW: Self-describing (ปกปิดข้อมูลจริง) -->
+    <section class="section" id="selfdesc">
+      <div class="container">
+        <h2 class="section-title reveal" data-delay="1">
+          <span class="Aerogold">โมดูลแบบอธิบายตัวเอง </span>
+          <span class="gold">(Self-describing Module)</span>
+        </h2>
+        <p class="section-desc reveal" data-delay="2">
+          โมดูลประกาศ “ตัวตน + แผนที่ความสามารถ” เพื่อให้ระบบรู้ว่ารองรับฟังก์ชันประเภทใด โดยหน้าเว็บนี้ใช้ตัวอย่างเชิงแนวคิดและปกปิดค่าที่ใช้จริง
+        </p>
+
+        <div class="grid2">
+          <div class="card reveal left" data-delay="1">
+            <h3>ตัวอย่างเชิงแนวคิด</h3>
+            <pre class="codebox"><code>Module Identity   = [REDACTED]
+Capability Map    = [ABSTRACTED TYPES ONLY]</code></pre>
+            <div class="pill">🔒 Public-safe</div>
+          </div>
+
+          <div class="card reveal right" data-delay="2">
+            <h3>ประเภทความสามารถ (ตัวอย่าง)</h3>
+            <ul class="list">
+              <li><b>ช่วงค่า (Range)</b> เช่น 0–180 สำหรับมุมเซอร์โว</li>
+              <li><b>สถานะ (Boolean)</b> เช่น เปิด/ปิด</li>
+              <li><b>ไม่มีฟังก์ชัน</b> สำหรับช่องที่ไม่ได้ใช้งาน</li>
+            </ul>
+            <div class="pill">🧾 Type-based</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- (6) NEW: ความเสถียรการสื่อสาร -->
+    <section class="section" id="reliability">
+      <div class="container">
+        <h2 class="section-title reveal" data-delay="1">
+          <span class="Aeroblue">ความเสถียรของการสื่อสาร</span>
+        </h2>
+
+        <p class="section-desc reveal" data-delay="2">
+          ระบบยึดแนวคิดการสื่อสารที่ตรวจสอบได้ เพื่อป้องกันคำสั่งผิดพลาดและลดความเสี่ยงจากการเชื่อมต่อที่ไม่เสถียร
+        </p>
+
+        <div class="grid3">
+          <div class="card reveal left" data-delay="1">
+            <h3>Serial Protocol</h3>
+            <p>มีโครงสร้างการส่งข้อมูลเป็นเฟรมเพื่อแยกคำสั่ง/ข้อมูล (ไม่เปิดโครงสร้างจริง)</p>
+            <div class="pill">🧵 Framing</div>
+          </div>
+
+          <div class="card reveal" data-delay="2">
+            <h3>CRC16</h3>
+            <p>ตรวจสอบความถูกต้องของข้อมูลก่อนนำไปใช้ ลดผลกระทบจากสัญญาณรบกวน</p>
+            <div class="pill">✅ Integrity</div>
+          </div>
+
+          <div class="card reveal right" data-delay="3">
+            <h3>ACK / NACK</h3>
+            <p>กลไกตอบรับเพื่อยืนยันการรับส่ง และรองรับการลองใหม่แบบมีขอบเขต</p>
+            <div class="pill">↩️ Confirm</div>
+          </div>
+
+          <div class="card reveal left" data-delay="1">
+            <h3>Timeout / Retry</h3>
+            <p>กำหนดเวลารอและการลองใหม่แบบจำกัด เพื่อให้พฤติกรรมระบบคาดเดาได้</p>
+            <div class="pill">⏱️ Bounded</div>
+          </div>
+
+          <div class="card reveal" data-delay="2">
+            <h3>Failsafe</h3>
+            <p>เมื่อโมดูลผิดปกติ ระบบสามารถลดระดับภารกิจได้ โดยยังคงความปลอดภัยการบิน</p>
+            <div class="pill">🛡 Safe</div>
+          </div>
+
+          <div class="card reveal right" data-delay="3">
+            <h3>State Handling</h3>
+            <p>จัดการการเชื่อมต่อแบบสถานะเพื่อลดพฤติกรรมไม่กำหนดแน่ชัด</p>
+            <div class="pill">📐 States</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- (7) NEW: ไฟ/ความปลอดภัย -->
+    <section class="section" id="power">
+      <div class="container">
+        <h2 class="section-title reveal" data-delay="1">
+          <span class="Radddddddd">ความปลอดภัยและระบบไฟ</span>
+        </h2>
+
+        <div class="grid2">
+          <div class="card reveal left" data-delay="1">
+            <h3>แยกไฟ Logic และ Payload</h3>
+            <p>
+              แยกไฟเลี้ยง Logic ออกจากไฟ Payload เพื่อลดการรบกวนข้ามโดเมน และลดโอกาสที่โหลดภารกิจจะกระทบระบบควบคุมหลัก
+            </p>
+            <div class="pill">🔋 Separation</div>
+          </div>
+
+          <div class="card reveal right" data-delay="2">
+            <h3>แนวคิดการตัดไฟโมดูลเมื่อผิดปกติ (อนาคต)</h3>
+            <p>
+              วางสถาปัตยกรรมให้รองรับการแยกความเสียหาย (fault isolation) โดยไม่เปิดเผยรายละเอียดวงจร/เงื่อนไขจริงบนหน้าเว็บ
+            </p>
+            <div class="pill">⚠️ Future</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIDEO -->
+    <section class="section" id="videos">
+  <div class="container">
+    <h2 class="section-title reveal" data-delay="1">วิดีโอสาธิต (Videos)</h2>
+    <p class="section-desc reveal" data-delay="2">
+      ตัวอย่างการทำงาน/การทดสอบ (นำเสนอระดับภาพรวม ไม่เผยรายละเอียด low-level)
+    </p>
+
+    <!-- Video 1 -->
+    <div class="card reveal" data-delay="3">
+      <h3 style="margin:0 0 10px;">
+        <span class="dot" aria-hidden="true">|</span> - Test Flight (Camera Module)
+      </h3>
+      <video class="video-center reveal zoom" data-delay="2"
+             data-autoplay loop muted playsinline preload="metadata">
+        <source src="video/noise.mp4" type="video/mp4" />
+        เบราว์เซอร์ของคุณไม่รองรับวิดีโอ
+      </video>
+    </div>
+
+    <div style="height:18px;"></div>
+
+    <!-- Video 2 -->
+    <div class="card reveal" data-delay="3">
+      <h3 style="margin:0 0 10px;">
+        <span class="dot" aria-hidden="true">|</span> - Test Flight (Agriculture Module)
+      </h3>
+      <video class="video-center reveal zoom" data-delay="2"
+             data-autoplay loop muted playsinline preload="metadata">
+        <source src="video/idk.mp4" type="video/mp4" />
+        เบราว์เซอร์ของคุณไม่รองรับวิดีโอ
+      </video>
+    </div>
+
+    <div style="height:18px;"></div>
+
+    <!-- Video 3  -->
+    <div class="card reveal" data-delay="3">
+      <h3 style="margin:0 0 10px;">
+        <span class="dot" aria-hidden="true">|</span> - การเชื่อมต่อ Agriculture Module
+      </h3>
+      <video class="video-center reveal zoom" data-delay="2"
+             data-autoplay loop muted playsinline preload="metadata">
+        <source src="video/supergolf.mp4" type="video/mp4" />
+        เบราว์เซอร์ของคุณไม่รองรับวิดีโอ
+      </video>
+    </div>
+
+    <div style="height:18px;"></div>
+
+    <!-- Video 4 (NEW) -->
+    <div class="card reveal" data-delay="3">
+      <h3 style="margin:0 0 10px;">
+        <span class="dot" aria-hidden="true">|</span>
+         - การเชื่อมต่อ Agriculture Module Test บินจริง
+      </h3>
+      <video class="video-center reveal zoom" data-delay="2"
+             data-autoplay loop muted playsinline preload="metadata">
+        <source src="video/danger.mp4" type="video/mp4" />
+        เบราว์เซอร์ของคุณไม่รองรับวิดีโอ
+      </video>
+    </div>
+
+    <div style="height:18px;"></div>
+
+    <!-- Video 5 (NEW) -->
+    <div class="card reveal" data-delay="3">
+      <h3 style="margin:0 0 10px;">
+        <span class="dot" aria-hidden="true">|</span> - การเชื่อมต่อ Camera Module
+      </h3>
+      <video class="video-center reveal zoom" data-delay="2"
+             data-autoplay loop muted playsinline preload="metadata">
+        <source src="video/golf.mp4" type="video/mp4" />
+        เบราว์เซอร์ของคุณไม่รองรับวิดีโอ
+      </video>
+    </div>
+  </div>
+</section>
+
+
+    <!-- (8) NEW: ตัวอย่างโมดูล -->
+<section class="section" id="examples">
+  <div class="container">
+    <h2 class="section-title reveal">
+      <span class="Aeroblue">ตัวอย่าง Module</span>
+    </h2>
+    <p class="section-desc reveal">ตัวอย่างโมดูลในเชิงแนวคิด</p>
+
+    <!-- GRID แนวนอน -->
+    <div class="module-grid reveal">
+
+      <div class="card module">
+        <img src="images/kak2.jpg" alt="Agriculture Module">
+        <h3>โมดูลเกษตร</h3>
+        <p>ควบคุมปั๊ม / รีเลย์</p>
+      </div>
+
+      <div class="card module">
+        <img src="images/kak1.jpg" alt="Camera Module">
+        <h3>โมดูลกล้อง</h3>
+        <p>Servo 2 แกน สำหรับควบคุมแกนกล้อง X,Y</p>
+      </div>
+
+      <div class="card module">
+        <img src="images/kak3.png" alt="Custom Module">
+        <h3>Custom Module</h3>
+        <p>พัฒนาโดยผู้ใช้งาน และ หน่วยงานต่างๆ</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+    <!-- (9) NEW: อนาคต -->
+    <section class="section" id="future">
+      <div class="container">
+        <h2 class="section-title reveal" data-delay="1">
+          <span class="Aerogold">แผนพัฒนาในอนาคต</span>
+        </h2>
+
+        <div class="grid3">
+          <div class="card reveal left" data-delay="1">
+            <h3>UAV</h3>
+            <p>ขยายระบบโมดูลให้รองรับภารกิจ UAV ที่หลากหลายขึ้น</p>
+            <div class="pill">✈️</div>
+          </div>
+
+          <div class="card reveal" data-delay="2">
+            <h3>AUV</h3>
+            <p>นำแนวคิด modular ไปสู่ยานใต้น้ำ โดยคงหลักการ subsystem</p>
+            <div class="pill">🌊</div>
+          </div>
+
+          <div class="card reveal right" data-delay="3">
+            <h3>หุ่นยนต์แบบ Modular Ecosystem</h3>
+            <p>ต่อยอด ecosystem ไปยังระบบหุ่นยนต์และแพลตฟอร์มอื่น</p>
+            <div class="pill">🤖</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <h2 class="section-title reveal" data-delay="1">
+          <span class="Radddddddd">FAQ</span>
+        </h2>
+        <p class="section-desc reveal" data-delay="2">
+          คำถามที่พบบ่อย (ปรับให้ปลอดภัยต่อการเผยแพร่)
+        </p>
+
+        <div class="faq">
+          <details class="card reveal" data-delay="1">
+            <summary>โมดูลใหม่ต้องแก้ Flight Core ไหม?</summary>
+            <p class="faq-body">
+              เป้าหมายคือไม่ต้องแก้ โดยยึดการประกาศความสามารถและการ route ของระบบภายใต้กติกาเดียวกัน
+            </p>
+          </details>
+
+          <details class="card reveal" data-delay="2">
+            <summary>ทำไมหน้าเว็บไม่เปิดรายละเอียดโปรโตคอล?</summary>
+            <p class="faq-body">
+              เพื่อป้องกันการ reverse ระบบ หน้านี้จึงอธิบายระดับสถาปัตยกรรมเท่านั้น
+            </p>
+          </details>
+
+          <details class="card reveal" data-delay="3">
+            <summary>ระบบรับมือการสื่อสารไม่เสถียรอย่างไร?</summary>
+            <p class="faq-body">
+              ระบบมีแนวคิดตรวจสอบความถูกต้องของข้อมูล และมีแนวทาง failsafe เพื่อคงความปลอดภัยการบิน
+            </p>
+          </details>
+
+          <details class="card reveal" data-delay="4">
+            <summary>ทำไมต้องแยกไฟ Logic กับ Payload?</summary>
+            <p class="faq-body">
+              เพื่อลดการรบกวนข้ามโดเมน และลดโอกาสที่โหลดภารกิจจะกระทบแกนควบคุมหลัก
+            </p>
+          </details>
+
+          <details class="card reveal" data-delay="5">
+            <summary>ผู้ใช้ภายนอกพัฒนาโมดูลเองได้ไหม?</summary>
+            <p class="faq-body">
+              ได้ในเชิงแนวคิด หากทำตามมาตรฐานการประกาศความสามารถและข้อกำหนดด้านความปลอดภัยของระบบ
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="contact">
+      <h2><span class="dot">•</span>  Contact</h2>
+      <h3>iabqosochqjz@gmail.com</h3>
+    </section>
+
+<footer>
+  <div class="container footer-credit">
+
+    <div class="credit-line">
+      <span class="role">Web Design & Development</span>
+      <span class="dot">•</span>
+      <span class="name">Pakin Maliphuang</span>
+    </div>
+
+    <div class="credit-line">
+      <span class="role">Drone System Design & Development</span>
+      <span class="dot">•</span>
+      <span class="name">Atitikun Pomsuwon</span>
+    </div>
+
+    <p class="copyright">
+      © 2025 ZonAero — Project Hub
+    </p>
+
+  </div>
+</footer>
+
+
+  <script src="Multi_purpose_drone_infor.js"></script>
+</body>
+</html>

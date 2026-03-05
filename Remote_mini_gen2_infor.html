@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZonAero | Modular Drone Ecosystem</title>
+  <link rel="stylesheet" href="Remote_mini_gen2_infor.css" />
+</head>
+
+<body>
+  <!-- NAV -->
+  <nav class="topnav reveal" data-delay="1">
+    <a class="brand" href="index.html">
+      <div class="brand-badge" aria-hidden="true"></div>
+      <div>
+        <div class="brand-title">ZonAero</div>
+        <div class="brand-sub">Socket Module Ecosystem</div>
+      </div>
+    </a>
+
+    <div class="navlinks">
+      <a href="#concept">แนวคิด</a>
+      <a href="#summary">สรุป</a>
+      <a href="#infor">สเปค</a>
+      <a href="#key-features">จุดเด่น</a>
+      <a href="#problem">ปัญหาเดิม</a>
+      <a href="#architecture">สถาปัตยกรรม</a>
+      <a href="#Dual_Mode">Dual Mode</a>
+      <a href="#reliability">ความเสถียร</a>
+      <a href="#future">อนาคต</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">ติดต่อ</a>
+    </div>
+  </nav>
+
+<!-- HERO -->
+  <header class="hero" id="top">
+    <!-- HeroBG: แบบไม่ fixed (ตามที่คุณต้องการก่อนหน้า) -->
+    <div class="hero-bg reveal zoom" data-delay="1" aria-hidden="true"></div>
+
+    <div class="container hero-inner">
+      <div>
+        <div class="hero-kicker reveal" data-delay="2">
+          <span class="dot" aria-hidden="true"></span>
+          สถาปัตยกรรม RF + Bluetooth • สลับ Mode • ทำงาน/เล่นเกม
+        </div>
+
+        <h1 class="hero-title reveal" data-delay="3">
+          <span class="hero-accent">Remote</span><br/>
+          <span class="Aerogold">Mini Gen I</span>
+          <span class="gold">//อเนกประสงค์//</span>
+        </h1>
+
+        <p class="hero-sub reveal" data-delay="4">
+            Remote ที่ออกแบบมาเพื่อใช้งานในงาน RF และ มีขนาดเล็ก
+        </p>
+
+        <div class="hero-actions reveal" data-delay="5">
+          <a class="btn" href="#contact">✉ ขอข้อมูลเพิ่ม</a>
+        </div>
+      </div>
+
+      <aside class="hero-card reveal right" data-delay="3">
+        <h3 style="margin:0 0 6px;">ภาพรวมโครงการ</h3>
+        <p style="margin:0;color:rgba(230,238,252,.72);line-height:1.65;">
+          Remote ที่ออกแบบมาเพื่อใช้งานในงาน RF โดยเฉพาะ แต่มีระบบเชื่อมต่อ Bluetooth กับอุปกรณ์ต่างๆที่รองรับ
+            โดยสามารถปลอมตัวเป็น อุปกรณ์ Bluetooth ประเภทต่างๆ เช่น joytick , mouse
+        </p>
+
+        <div class="statgrid">
+          <div class="stat"><div class="k">MCU</div><div class="v">ESP32 Dev</div></div>
+          <div class="stat"><div class="k">แนวคิด</div><div class="v">บางเบา&อเนกประสงค์</div></div>
+          <div class="stat"><div class="k">Power</div><div class="v">3780mAh 1S</div></div>
+          <div class="stat"><div class="k">Multi-purpose</div><div class="v">RF Bluetooth Wifi</div></div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <!-- =========================
+         (0) NEW: แนวคิดโครงการ (5W1H) - ภาษาไทย + ป้องกันความลับ
+    ========================== -->
+    <section class="section" id="concept">
+      <div class="container">
+        <h2 class="section-title reveal" data-delay="1">
+          <span class="Aerogold">แนวคิดของโครงการ</span>
+        </h2>
+        <div class="card reveal" data-delay="2">
+          <p class="paragraph">
+            ออกแบบ Remote ที่ใช้ในงาน RF 2.4-2.5Ghz (คลื่นวิทยุ) และ สามารถใช้งานในคลื่นวิทยุอื่นได้ด้วย เช่น Bluetooth (Bluetooth 4.2) หรือ Wifi (2.4Ghz)
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="summary">
+      <div class="container">
+        <h2 class="section-title reveal" data-delay="1">
+          <span class="gold">สรุปโครงการ</span>
+        </h2>
+        <div class="card reveal" data-delay="2">
+          <p class="paragraph">
+            <span class="gold">อเนกประสงค์</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="infor">
+      <div class="container">
+        <h2 class="section-title reveal" data-delay="1">
+          <span class="Aeroblue">สเปค</span>
+        </h2>
+        <p class="section-desc reveal" data-delay="2">
+          คุณสมบัติระดับสถาปัตยกรรม
+        </p>
+
+        <div class="grid3">
+          <div class="card reveal left" data-delay="1">
+            <h3>Display</h3>
+            <p>
+               •จอแสดงผลขนาด 128*64px (4096px)
+               •สถาปัตยกรรม Liquid Crystal Display (LCD)
+               •ปรับความสว่างด้วย PWM ถึง 1024 ระดับ
+            </p>
+            <div class="pill">⚙️ Stable Core</div>
+          </div>
+
+          <div class="card reveal" data-delay="2">
+            <h3>Button & Toggle Switch</h3>
+            <p>แยกส่วนภารกิจออกจากการบิน ทำให้พัฒนา/ทดสอบ/สลับภารกิจได้เร็ว</p>
+            <div class="pill">🧩 Subsystem</div>
+          </div>
+
+          <div class="card reveal right" data-delay="3">
+            <h3>Analog input</h3>
+            <p>ประกาศ “ตัวตน + ความสามารถของ Module” เพื่อให้ระบบจัดการได้อัตโนมัติ</p>
+            <div class="pill">🧾 Discovery</div>
+          </div>
+
+          <div class="card reveal left" data-delay="1">
+            <h3>การสื่อสารเน้นความเสถียร</h3>
+            <p>กลไกยืนยัน/ลองใหม่แบบมีขอบเขต โดยต่อย่อดมาจาก Protocol (CRC16-CCITT)</p>
+            <div class="pill">📡 Reliable Link</div>
+          </div>
+
+          <div class="card reveal" data-delay="2">
+            <h3>แยกระบบไฟ</h3>
+            <p>แยกไฟ Logic และ Payload เพื่อลดผลกระทบต่อ Flight core</p>
+            <div class="pill">🔌 Power Domains</div>
+          </div>
+
+          <div class="card reveal right" data-delay="3">
+            <h3>การสื่อสารเน้นความเสถียร</h3>
+            <p>รองรับโมดูลจากหลายผู้พัฒนา ภายใต้ข้อกำหนดเดียวกัน</p>
+            <div class="pill">🧑‍💻 Extensible</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <h2><span class="dot">•</span>  Contact</h2>
+      <h3>iabqosochqjz@gmail.com</h3>
+    </section>
+
+  </main>
+  <script src="Remote_mini_gen2_infor.js"></script>
+</body>
