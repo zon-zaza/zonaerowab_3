@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZonAero | Project Hub</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+  <script src="index.js"></script>
+  <audio id="bootSound" preload="auto">
+    <source src="audio/boost.mp3" type="audio/mpeg">
+  </audio>
+  <!-- HERO (Compact + Bigger Text) -->
+  <header class="hero hero-compact" id="top">
+    <div class="container">
+      <div class="hero-mini reveal">
+        <div class="hero-eyebrow">
+          Drones • Robotics • DIY Engineering • Aerospace
+        </div>
+
+        <h1 class="hero-title">
+          ZonAero Project <span>Hub</span>
+        </h1>
+
+        <p class="hero-sub">
+          ศูนย์รวมโปรเจกต์และระบบต้นแบบของผม — เน้นสถาปัตยกรรมระบบ,
+          ความเสถียร และการต่อยอดใช้งานจริง
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="container">
+        <h2 class="section-title reveal"><span class="bluetexT">Projects</span></h2>
+        <p class="section-desc reveal">
+          แบ่งตามสถานะการพัฒนา
+        </p>
+
+        <!-- ACTIVE -->
+        <div class="block reveal">
+          <div class="block-head">
+            <h3 class="block-title active">Active</h3>
+            <span class="block-tag active">กำลังพัฒนา</span>
+          </div>
+
+          <div class="hlist" aria-label="Active projects">
+            <a class="card-link" href="Multi_purpose_drone_infor.html">
+              <div class="card project active">
+                <h3>Multi-purpose Drone</h3>
+                <img src="images/Multi_purpose_Drone.jpg" alt="Multi-purpose Drone">
+                <p>Modular Ecosystem + Socket Module architecture</p>
+              </div>
+            </a>
+
+            <a class="card-link" href="Remote_mini_gen2_infor.html">
+              <div class="card project active">
+                <h3>Remote mini Gen I</h3>
+                <img src="images/Remote_mini_gen2.jpg" alt="Zon Audio Lab">
+                <p>ควมคุม Multi-purpose Drone และเป็น joytick เล่นเกมผ่าน Bluetooth</p>
+              </div>
+            </a>
+
+            <div class="card project active">
+              <h3>Project Zon Audio Lab</h3>
+              <img src="images/ZonaudioLab.jpg" alt="Zon Audio Lab">
+              <p>ทดลองระบบเสียงต้นทุนต่ำ + คุณภาพดี</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FUTURE -->
+        <div class="block reveal">
+          <div class="block-head">
+            <h3 class="block-title future">Future</h3>
+            <span class="block-tag future">แผนต่อยอด</span>
+          </div>
+
+          <div class="hlist" aria-label="Future projects">
+            <div class="card project future">
+              <h3>V.A.T Drone</h3>
+              <img src="images/vat-drone.jpg" alt="VAT Drone">
+              <p>Vertical Adaptive Transition Drone</p>
+            </div>
+
+          <div class="hlist" aria-label="Future projects">
+            <div class="card project future">
+              <h3>Class AB Amplifier</h3>
+              <img src="images/ClassABAmp.jpg" alt="VAT Drone">
+              <p>Project ZonaudioLab //////////////////////</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="container"> 
+          <h3 class="block-title inactive">>--------------</h3>
+        </div>
+
+        <!-- INACTIVE -->
+        <div class="block reveal">
+          <div class="block-head">
+            <h3 class="block-title inactive">Inactive</h3>
+            <span class="block-tag inactive">พักไว้</span>
+          </div>
+
+          <div class="hlist" aria-label="Inactive projects">
+            <!-- ถ้าคุณยังอยากเก็บ cockpit เป็น inactive ใส่ไว้ได้ -->
+            <a class="card-link" href="VAT_Drone_Controll.html">
+              <div class="card project inactive">
+                <h3>V.A.T Drone Cockpit</h3>
+                <p>หน้า cockpit สำหรับควบคุม/มอนิเตอร์ (ต้นแบบ)</p>
+              </div>
+            </a>
+
+            <div class="card project inactive">
+              <h3>Drone Remote gen I</h3>
+              <img src="images/Multi_purpose_Remote.jpg" alt="Drone Remote gen I">
+              <p>รีโมทรุ่นแรก</p>
+            </div>
+
+            <div class="card project inactive">
+              <h3>Multi-purpose Remote gen II</h3>
+              <img src="images/Remote_gen_2.jpg" alt="Multi-purpose Remote gen II">
+              <p>รีโมทอเนกประสงค์</p>
+            </div>
+
+            <div class="card project inactive">
+              <h3>Obstacle Avoid Robot</h3>
+              <img src="images/what_the_fuxk.jpg" alt="Obstacle Avoid Robot">
+              <p>โปรเจกต์ทดลอง</p>
+            </div>
+
+            <div class="card project inactive">
+              <h3>สถานีตรวจวัดภัยธรรมชาติ</h3>
+              <img src="images/plan_B.jpg" alt="Disaster Monitoring Station">
+              <p>แนวคิดสถานีตรวจวัดภัยธรรมชาติ (Plan B)</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+  <div class="container footer-credit">
+
+    <div class="credit-line">
+      <span class="role">Web Design & Development</span>
+      <span class="dot">•</span>
+      <span class="name">Pakin Maliphuang</span>
+    </div>
+
+    <div class="credit-line">
+      <span class="role">Drone System Design & Development</span>
+      <span class="dot">•</span>
+      <span class="name">Atitikun Pomsuwon</span>
+    </div>
+
+    <p class="copyright">
+      © 2025 ZonAero — Project Hub test
+    </p>
+
+  </div>
+</footer>
+</body>
+</html>

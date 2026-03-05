@@ -1,0 +1,273 @@
+:root{
+  --bg:#0b0f18;
+  --bg2:#0f172a;
+  --text:#e6eefc;
+  --muted: rgba(230,238,252,.7);
+  --line: rgba(255,255,255,.12);
+  --brand:#5aa7ff;
+  --brand2:#9b7bff;
+
+  --active:#35f3a4;
+  --future:#ffd166;
+  --inactive:rgba(255,255,255,.45);
+
+  --radius:16px;
+}
+
+*{ box-sizing:border-box; }
+
+html{
+  overflow-x:hidden;
+  overflow-y:auto;
+  scroll-behavior:auto;
+}
+
+body{
+  margin:0;
+  font-family: system-ui, Arial, sans-serif;
+  background:
+    radial-gradient(900px 420px at 12% 12%, rgba(90,167,255,.14), transparent 60%),
+    radial-gradient(700px 340px at 82% 28%, rgba(155,123,255,.12), transparent 60%),
+    linear-gradient(180deg, var(--bg), var(--bg2));
+  color:var(--text);
+}
+
+/* ---------- HERO (compact แต่ใหญ่ขึ้น) ---------- */
+.hero-compact{
+  padding: 72px 0 56px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.container{
+  width:min(1100px, 92vw);
+  margin:auto;
+}
+
+.hero-mini{
+  max-width: 860px;
+}
+
+.hero-eyebrow{
+  font-size: 13.5px;
+  letter-spacing: .6px;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.hero-title{
+  margin:0 0 12px;
+  font-size: clamp(36px, 5.2vw, 56px);
+  line-height: 1.08;
+}
+
+.hero-title span{
+  background: linear-gradient(135deg, var(--brand), var(--brand2));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero-sub{
+  margin:0;
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 760px;
+  font-size: 16px;
+}
+
+/* ---------- Sections ---------- */
+.section{
+  padding: 56px 0;
+}
+
+.section-title{
+  margin:0 0 6px;
+  font-size: 22px;
+}
+
+.section-desc{
+  margin:0 0 24px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* กัน parent ปิดการเลื่อนโดยไม่ตั้งใจ */
+.section, .container, .block{
+  overflow: visible;
+}
+
+/* ---------- Blocks ---------- */
+.block{ margin-bottom: 36px; }
+
+.block-head{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom: 10px;
+}
+
+.block-title{
+  margin:0;
+  font-size: 18px;
+  letter-spacing: .2px;
+}
+
+.block-title.active{ color: var(--active); }
+.block-title.future{ color: var(--future); }
+.block-title.inactive{ color: var(--inactive); }
+
+.block-tag{
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,.04);
+}
+
+.block-tag.active{ color: var(--active); }
+.block-tag.future{ color: var(--future); border-style:dashed; }
+.block-tag.inactive{ color: var(--inactive); }
+
+/* ---------- Horizontal list (FIX: เลื่อนได้จริง) ---------- */
+.hlist{
+  display:flex;
+  gap:14px;
+
+  overflow-x: auto !important;
+  overflow-y: hidden;
+
+  padding: 6px 2px 12px;
+
+  /* ลื่นบนมือถือ/ทัชแพด */
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+
+  /* สำคัญ: ให้ gesture ไปทาง X ได้จริง */
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
+
+  /* snap ให้ดูพรีเมียม */
+  scroll-snap-type:x mandatory;
+}
+
+.hlist > *{
+  flex: 0 0 auto;         /* สำคัญ: กันยุบ */
+  scroll-snap-align:start;
+}
+
+/* scrollbar แนวนอนแบบสุภาพ */
+.hlist::-webkit-scrollbar{ height: 8px; }
+.hlist::-webkit-scrollbar-track{ background: transparent; }
+.hlist::-webkit-scrollbar-thumb{
+  background: rgba(255,255,255,.14);
+  border-radius: 999px;
+}
+
+/* ---------- Cards ---------- */
+.card{
+  width: min(320px, 82vw);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius: var(--radius);
+  padding:14px;
+  background: rgba(255,255,255,.04);
+  transition: transform .18s ease, border-color .18s ease, background .18s ease, opacity .18s ease;
+}
+
+.card:hover{
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,.20);
+  background: rgba(255,255,255,.06);
+}
+
+.card h3{ margin:0 0 8px; font-size: 16px; }
+.card p{ margin:8px 0 0; color: var(--muted); line-height: 1.6; }
+
+.project img{
+  width:100%;
+  height:auto;
+  border-radius: 12px;
+  margin-top: 8px;
+  display:block;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.25);
+}
+
+.card-link{
+  text-decoration:none;
+  color: inherit;
+  display:block;
+}
+
+/* state differences */
+.card.active{ box-shadow: 0 0 0 1px rgba(53,243,164,.16); }
+.card.future{ border-style:dashed; }
+.card.inactive{ opacity:.55; }
+.card.inactive:hover{ opacity:.78; }
+
+/* ---------- Footer ---------- */
+footer{
+  border-top:1px solid rgba(255,255,255,.08);
+  padding:18px 0;
+  color:var(--muted);
+  font-size: 13px;
+}
+
+/* ---------- Reveal ---------- */
+.reveal{
+  opacity:0;
+  transform:translateY(18px);
+  transition: opacity .55s ease, transform .55s ease;
+  will-change: opacity, transform;
+}
+.reveal.show{
+  opacity:1;
+  transform:none;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 600px){
+  .hero-compact{ padding: 60px 0 44px; }
+  .hero-title{ font-size: clamp(34px, 8vw, 46px); }
+  .hero-sub{ font-size: 15px; }
+  .section{ padding: 46px 0; }
+}
+/* ---------- Popular Credit Style ---------- */
+.footer-credit{
+  text-align:center;
+  font-size:13px;
+  color:var(--muted);
+}
+
+.credit-line{
+  margin: 4px 0;
+  line-height: 1.6;
+}
+
+.credit-line .role{
+  opacity:.85;
+}
+
+.credit-line .dot{
+  margin: 0 6px;
+  opacity:.6;
+}
+
+.credit-line .name{
+  color: var(--text);
+  font-weight: 500;
+}
+
+.copyright{
+  margin-top: 10px;
+  font-size:12px;
+  opacity:.75;
+}
+
+.bluetexT{
+  background: linear-gradient(135deg, rgba(90,167,255,.95), rgba(155,123,255,.95));
+  -webkit-background-clip: text;
+  background-clip:text;
+  color: transparent;
+  font-weight: 900;
+  text-shadow: 0 0 22px rgba(135, 102, 255, 0.336);
+}
