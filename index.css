@@ -198,6 +198,15 @@ body{
   display:block;
 }
 
+.center {
+  text-align: center;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius: var(--radius);
+  padding:14px;
+  background: rgba(255,255,255,.04);
+  transition: transform .18s ease, border-color .18s ease, background .18s ease, opacity .18s ease;
+}
+
 /* state differences */
 .card.active{ box-shadow: 0 0 0 1px rgba(53,243,164,.16); }
 .card.future{ border-style:dashed; }
