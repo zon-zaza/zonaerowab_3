@@ -280,3 +280,129 @@ footer{
   font-weight: 900;
   text-shadow: 0 0 22px rgba(135, 102, 255, 0.336);
 }
+
+/* =========================
+   TEACHER SUBMISSION
+   ========================= */
+
+.block-title.submission {
+  color: #ffcc66;
+}
+
+.block-tag.submission {
+  color: #ffcc66;
+  border-color: #ffcc66;
+}
+
+.card.project.submission {
+  cursor: pointer;
+}
+
+.submission-button {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 14px;
+  border: 1px solid currentColor;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+.download-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.download-button {
+  display: inline-block;
+  padding: 12px 20px;
+
+  border: 1px solid currentColor;
+  border-radius: 10px;
+
+  text-decoration: none;
+  font-weight: 600;
+
+  transition: 0.2s ease;
+}
+
+.download-button:hover {
+  transform: translateY(-2px);
+  opacity: 0.8;
+}
+.game-media {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.game-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+
+  object-fit: cover;
+
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  background: #080d18;
+
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.35);
+}
+
+.media-caption {
+  margin-top: 10px;
+  text-align: center;
+
+  font-size: 0.9rem;
+  opacity: 0.65;
+}
+
+.game-media {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.game-preview,
+.game-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+
+  object-fit: cover;
+
+  border-radius: 14px;
+  background: #080d18;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  margin-bottom: 16px;
+}
+
+.media-caption {
+  text-align: center;
+  opacity: 0.65;
+  font-size: 0.9rem;
+}
+
+.mariwoke-layout {
+  width: 100%;
+  display: grid;
+
+  grid-template-columns: 260px minmax(0, 1fr);
+
+  gap: 24px;
+  align-items: start;
+}
+
+.mariwoke-info {
+  width: 100%;
+}
+
+.game-media {
+  width: 100%;
+  min-width: 0;
+}
